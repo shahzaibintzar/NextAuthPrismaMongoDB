@@ -29,11 +29,16 @@ export const authOptions: AuthOptions = {
           12
         );
 
-        if (currentHashedpassword === user.hashedpassword) {
+        if (currentHashedpassword !== user.hashedpassword) {
           throw new Error("invalid credentials");
         }
-        return uaer;
+        return user;
       },
     }),
   ],
+  secret: process.env.NEXTAUTH_SECRET,
+  session: {
+    strategy: "jwt",
+  },
+  debug: process.env.NODE_ENV !== "production",
 };
