@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import Input from "../../../../../components/input";
+import Input from "../../../../../components/Input";
 import toast from "react-hot-toast";
 import { signIn, signOut } from "next-auth/react";
 
@@ -25,7 +25,7 @@ export default function LoginForm() {
       redirect: false,
     });
 
-    if (login?.ok) {
+    if (login?.ok){
       toast.success("Correct login");
       window.location.assign("/");
     } else if (login?.error) {

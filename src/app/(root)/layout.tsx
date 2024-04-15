@@ -3,16 +3,21 @@ import React from "react";
 import { authOptions } from "../../../libs/AuthOptions";
 import { redirect } from "next/navigation";
 
-interface NextAuthSessionProviderProps {
-  children: React.ReactNode;
+interface ProtectedRootLayoutProps {
+  children: React.ReactNode
 }
 export default async function ProtectedRootLayout({
-  children,
-}: NextAuthSessionProviderProps) {
+   children 
+  }: ProtectedRootLayoutProps) {
+
   const session = await getServerSession(authOptions);
 
   if (!session?.user?.email) {
     redirect("/signin");
   }
-  return <main>{children}</main>;
+  return(
+     <main>
+      {children}
+      </main>
+  )
 }

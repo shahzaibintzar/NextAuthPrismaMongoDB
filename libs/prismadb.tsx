@@ -1,13 +1,31 @@
+// import { PrismaClient } from "@prisma/client";
+
+// declare global {
+//   var prisma: PrismaClient;
+// }
+
+// const prisma = global.prisma || new PrismaClient();
+
+// if (process.env.NODE_ENV !== "production") globalThis.prisma = prisma;
+
+// export default prisma;
+
 import { PrismaClient } from "@prisma/client";
 
 declare global {
   var prisma: PrismaClient;
 }
 
-const client = globalThis.prisma || new PrismaClient();
+let prisma: PrismaClient;
 
-if (process.env.NODE_ENV !== "production") globalThis.prisma = client;
+if (process.env.NODE_ENV === "production") {
+  prisma = new PrismaClient();
+} else {
+  if (!global.prisma) {
+    global.prisma = new PrismaClient();
+  }
 
-export default client;
+  prisma = global.prisma;
+}
 
-// the below code fragment can be found in:
+export default prisma;
