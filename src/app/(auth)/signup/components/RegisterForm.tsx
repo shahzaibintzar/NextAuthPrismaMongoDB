@@ -1,13 +1,19 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Input from "../../../../../components/input";
 import toast from "react-hot-toast";
 import axios from "axios";
-import { signIn } from "next-auth/react";
+import { signIn, signOut } from "next-auth/react";
 import { useRouter } from "next/navigation";
 
 export default function RegisterForm() {
+  useEffect(() => {
+    signOut({
+      redirect: false,
+    });
+  }, []);
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -21,12 +27,6 @@ export default function RegisterForm() {
         email,
         password,
       });
-
-      //   signIn("credentials", {
-      //     email,
-      //     password,
-      //     redirect: false,
-      //   });
 
       toast.success("Registered Successfully");
 
@@ -56,7 +56,7 @@ export default function RegisterForm() {
       />
       <div
         onClick={handleRegister}
-        className="px-10 py-3 bg-neutral-900 rounded-full text-white disabled:opacity-70"
+        className="px-10 py-3 bg-neutral-900 rounded-full text-white disabled:opacity-70 cursor-pointer"
       >
         Register
       </div>

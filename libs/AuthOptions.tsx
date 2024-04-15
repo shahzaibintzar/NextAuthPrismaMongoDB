@@ -28,10 +28,7 @@ export const authOptions: AuthOptions = {
           credentials.passward,
           12
         );
-
-        if (currentHashedpassword !== user.hashedpassword) {
-          throw new Error("invalid credentials");
-        }
+        bcrypt.compare(currentHashedpassword, user.hashedpassword);
         return user;
       },
     }),

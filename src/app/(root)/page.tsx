@@ -1,10 +1,14 @@
+import { getServerSession } from "next-auth";
 import React from "react";
+import { authOptions } from "../../../libs/AuthOptions";
+import LogoutBtn from "../../../components/LogoutBtn";
 
-export default function HomePage() {
+export default async function HomePage() {
+  const session = await getServerSession(authOptions);
   return (
     <main>
-      <div>Protected Dashboard, hello: </div>
-      <div>Logout</div>
+      <div>Protected Dashboard, hello: {session?.user?.email} </div>
+      <LogoutBtn />
     </main>
   );
 }
