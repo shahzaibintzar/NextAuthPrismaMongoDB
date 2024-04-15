@@ -15,7 +15,7 @@ export async function POST(req: Request) {
         email: email,
       },
     });
-    if (!userAlreadyExist?.id) {
+    if (userAlreadyExist?.id) {
       return new NextResponse("User already exist", { status: 500 });
     }
     const hashedpassword = await bcrypt.hash(passward, 12);
