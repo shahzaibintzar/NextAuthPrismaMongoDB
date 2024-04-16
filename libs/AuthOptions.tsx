@@ -21,14 +21,14 @@ export const authOptions: AuthOptions = {
             email: credentials.email,
           },
         });
-        if (!user || !user.id || !user.hashedpassword) {
+        if (!user || !user.id || !user.hashedPassword) {
           throw new Error("invalid credentials");
         }
         const currentHashedpassword = await bcrypt.hash(
           credentials.password,
           12
         );
-        bcrypt.compare(currentHashedpassword, user.hashedpassword);
+        bcrypt.compare(currentHashedpassword, user.hashedPassword);
         return user;
       },
     }),

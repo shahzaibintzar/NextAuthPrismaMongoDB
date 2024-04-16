@@ -25,7 +25,7 @@ export default function LoginForm() {
       redirect: false,
     });
 
-    if (login?.ok){
+    if (login?.ok) {
       toast.success("Correct login");
       window.location.assign("/");
     } else if (login?.error) {
